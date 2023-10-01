@@ -1,3 +1,4 @@
-const myLog = (...data: any[]): void => console.log(...data);
+const myLog = (...data: any[]): boolean =>
+	process.stdout.write(data.join(" ") + "\n");
 
 myLog("hello", "hii", 1);
