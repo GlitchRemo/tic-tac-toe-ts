@@ -1,7 +1,7 @@
 import { GameState } from "./game";
 import { MovesAndIcon } from "./moves";
 
-export class View {
+export default class View {
 	#promptPlayerForInput(player: string) {
 		console.log(player, "'s turn");
 	}
@@ -25,6 +25,7 @@ export class View {
 			const row = [i, i + 1, i + 2].map((x) => moves[x] || " ").join("|");
 			console.log(row);
 		}
+		console.log();
 	}
 
 	render(gameStatus: GameState): void {
@@ -44,8 +45,4 @@ export class View {
 				this.#promptPlayerForInput(currentPlayerName);
 		}
 	}
-}
-
-export interface ViewI {
-	render(gameStatus: GameState): void;
 }

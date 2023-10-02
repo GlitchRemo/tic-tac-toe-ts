@@ -1,6 +1,6 @@
 import { Move } from "./move";
 import { MovesAndIcon } from "./moves";
-import { PlayersI } from "./players";
+import Players from "./players";
 
 export type GameState = {
 	moves: MovesAndIcon;
@@ -10,11 +10,11 @@ export type GameState = {
 };
 
 export class Game {
-	private players: PlayersI;
+	private players: Players;
 	private isOver: boolean;
 	winner: string;
 
-	constructor(players: PlayersI) {
+	constructor(players: Players) {
 		this.players = players;
 		this.isOver = false;
 		this.winner = "";
@@ -47,9 +47,4 @@ export class Game {
 			isOver: this.isOver,
 		};
 	}
-}
-
-export interface GameI {
-	consolidateMove(move: Move): void;
-	state(): GameState;
 }

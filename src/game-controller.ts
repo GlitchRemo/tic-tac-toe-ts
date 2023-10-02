@@ -1,14 +1,14 @@
-import { GameI } from "./game";
-import { InputControllerI } from "./keyboard-controller";
 import { Move } from "./move";
-import { ViewI } from "./view";
+import { Game } from "./game";
+import KeyboardController from "./keyboard-controller";
+import View from "./view";
 
 export default class GameController {
 	private game;
 	private view;
 	private inputController;
 
-	constructor(game: GameI, IOController: InputControllerI, view: ViewI) {
+	constructor(game: Game, IOController: KeyboardController, view: View) {
 		this.game = game;
 		this.view = view;
 		this.inputController = IOController;
@@ -20,9 +20,8 @@ export default class GameController {
 		this.inputController.on("move-entered", (move: Move) => {
 			this.game.consolidateMove(move);
 			this.view.render(this.game.state());
-			if (this.game.state().isOver) {
-				this.inputController.stop();
-			}
+
+			if (this.game.state().isOver) this.inputController.stop();
 		});
 
 		this.inputController.start();

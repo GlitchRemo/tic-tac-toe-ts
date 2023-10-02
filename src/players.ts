@@ -1,12 +1,12 @@
 import { Move } from "./move";
 import { MovesAndIcon } from "./moves";
-import { PlayerT } from "./player";
+import Player from "./player";
 import { WINNING_SEQUENCES } from "./winning-sequences";
 
 export default class Players {
-	private players: PlayerT[];
+	private players: Player[];
 
-	constructor(players: PlayerT[]) {
+	constructor(players: Player[]) {
 		this.players = players;
 	}
 
@@ -47,14 +47,4 @@ export default class Players {
 			return sequence.every((number) => currentPlayerMoves.includes(number));
 		});
 	}
-}
-
-export interface PlayersI {
-	getCurrentPlayerName(): string;
-	changeTurn(): void;
-	recordMove(move: Move): void;
-	validMove(move: Move): boolean;
-	totalMovesMade(): number;
-	movesMade(): MovesAndIcon;
-	hasWon(): boolean;
 }

@@ -1,13 +1,13 @@
 import { Icon } from "./icon";
 import { keymap } from "./keymap";
 
-import { Player } from "./player";
 import Players from "./players";
 import { Game } from "./game";
-import { KeyboardController } from "./keyboard-controller";
-import { View } from "./view";
+import View from "./view";
 
 import GameController from "./game-controller";
+import Player from "./player";
+import KeyboardController from "./keyboard-controller";
 
 const main = () => {
 	const firstPlayerName = process.argv[2];

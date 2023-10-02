@@ -1,13 +1,11 @@
 import EventEmitter from "events";
 import { Input } from "./input";
 import { Keymap } from "./keymap";
-import { Move } from "./move";
-type Stdin = NodeJS.ReadStream & { fd: 0 };
 
-export class KeyboardController
-	extends EventEmitter
-	implements InputControllerI
-{
+type Stdin = NodeJS.ReadStream & { fd: 0 };
+const ForceQuitSequences = ["p"];
+
+export default class KeyboardController extends EventEmitter {
 	private stdin;
 	private keymap;
 
@@ -22,21 +20,15 @@ export class KeyboardController
 		this.stdin.setEncoding("utf-8");
 
 		this.stdin.on("data", (data: Input) => {
-			console.log(data);
-			switch (true) {
-				default:
-					this.emit("move-entered", this.keymap[data]);
-			}
+			if (ForceQuitSequences.includes(data)) return this.stop();
+
+			if (this.keymap[data] === undefined) return;
+
+			this.emit("move-entered", this.keymap[data]);
 		});
 	}
 
 	stop(): void {
 		this.stdin.destroy();
 	}
-}
-
-export interface InputControllerI {
-	start(): void;
-	stop(): void;
-	on(event: string, cb: (data: Move) => void): void;
 }

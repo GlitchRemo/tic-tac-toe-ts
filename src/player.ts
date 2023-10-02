@@ -1,7 +1,7 @@
 import { Move } from "./move";
 import { Icon } from "./icon";
 
-export class Player {
+export default class Player {
 	readonly name: string;
 	readonly icon: Icon;
 	readonly moves: Move[];
@@ -16,10 +16,3 @@ export class Player {
 		this.moves.push(move);
 	}
 }
-
-export type PlayerT = {
-	readonly name: string;
-	readonly icon: Icon;
-	readonly moves: Move[];
-	updateMoves(move: Move): void;
-};
